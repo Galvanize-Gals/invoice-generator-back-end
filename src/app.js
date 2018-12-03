@@ -9,12 +9,11 @@ app.use(bodyParser.json())
 if (process.env.NODE_ENV === 'development') app.use(morgan('dev'))
 if(process.env.NODE_ENV !== 'production'){ require('dotenv').load() }
 
-
 // Routes
-app.use('/invoices', require('./routes/invoices'));
 app.use('/', require('./routes/auth'))
 app.use('/', require('./routes/users'))
-
+app.use('/invoices', require('./routes/invoices'));
+app.use('/invoices', require('./routes/line_items'));
 
 // Default Route
 app.use(function(req, res, next){
@@ -40,7 +39,6 @@ app.use(function(err, req, res, next){
 const port = process.env.PORT || 3000
 
 app.listen(port, function(){
-
   console.log(`Invoice Creator listening on port ${port}`)
 })
 
