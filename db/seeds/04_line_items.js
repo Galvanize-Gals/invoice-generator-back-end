@@ -17,7 +17,7 @@ exports.seed = function(knex, Promise) {
     .then(() => {
       // reset sequence
       return knex.raw(
-        `SELECT setval('line_items_seq', (SELECT MAX(id) FROM line_items));`
+        `SELECT setval('line_items_id_seq', (SELECT MAX(id) FROM line_items));`
         )
     })
 };

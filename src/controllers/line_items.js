@@ -19,7 +19,19 @@ function getOne(req, res, next){
     .catch(next)
 }
 
+function create(req, res, next) {
+    model.create(req.body.description, req.body.quantity, req.body.rate, req.body.invoice_id)
+    .then(function(data){
+        if(data){
+            console.log(data)
+            return res.status(201).send({data})
+        }
+        throw ({ status: 400, message: "Line Item Not Created"})
+    })
+}
+
 module.exports = {
     getAll,
-    getOne
+    getOne,
+    create
 }
