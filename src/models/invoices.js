@@ -5,7 +5,8 @@ function getAll(){
 }
 
 function getOne(invoiceId){
-    return knex('invoices').where({ id: invoiceId })
+    return knex('invoices')
+    .where({ 'invoices.id': invoiceId })
 }
 
 

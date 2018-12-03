@@ -18,6 +18,7 @@ app.use(bodyParser.json())
 app.use('/invoices', require('./routes/invoices'));
 app.use('/auth', require('./routes/auth'))
 app.use('/users', require('./routes/users'))
+app.use('/invoices', require('./routes/line_items'));
 
 //authorization & authentication
 const authController = require('./controllers/auth')
