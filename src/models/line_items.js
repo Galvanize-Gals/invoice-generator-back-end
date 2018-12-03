@@ -9,8 +9,16 @@ function getOne(line_item_id){
     .where({ 'line_items.id': line_item_id })
 }
 
+function create(desc, quant, rate, inv_id) {
+    return knex('line_items')
+    .insert({description:desc, quantity: quant, rate: rate, invoice_id: inv_id})
+    .returning('*')
+}
+
+
 
 module.exports = {
     getAll,
-    getOne
+    getOne,
+    create
 }
