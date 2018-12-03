@@ -1,64 +1,42 @@
-const authModel = require('../models/auth')
+const auth = require('../models/auth')
 const jwt = require('jsonwebtoken')
 
+const login = (req, res, next) => {
 
-function login(req, res, next){
-  if(!req.body.username){
-    return next({ status: 400, message: 'Bad request'})
-  }
+  if (!req.body.username || !req.body.password)
+    return next({ status: 400, message: 'Bad Request' })
 
-  if(!req.body.password){
-    return next({ status: 400, message: 'Bad request'})
-  }
+  auth.login(req.body.username, req.body.password)
+    .then(user => {
+      const token = jwt.sign({ id: user.id }, process.env.SECRET)
+      return res.status(200).send({ token })
+    }).catch(next)
 
-  authModel.login(req.body.username, req.body.password)
-  .then(function(user){
-
-    const token = jwt.sign({id: user.id}, process.env.SECRET)
-
-    return res.status(200).send({ token })
-  })
-  .catch(next)
 }
 
+const status = (req, res, next) => res.status(200).send({ id: req.claim.id })
 
-function getAuthStatus(req, res, next){
-    res.status(200).send({id:req.claim.id})
-}
+const authenticated = (req, res, next) => {
 
+  if (!req.headers.authorization)
+    return next({ status: 401, message: 'Authentication Failed' })
 
-function isAuthenticated(req, res, next){
+  const [bearer, token] = req.headers.authorization.split(' ')
+  jwt.verify(token, process.env.SECRET, (err, payload) => {
 
-  if(!req.headers.authorization){
-    return next({ status: 401, message: 'Unauthorized' })
-  }
-  const [scheme, credentials] = req.headers.authorization.split(' ')
-
-
-  jwt.verify(credentials, process.env.SECRET, (err, payload)=>{
-    if(err){
-      return next({ status: 401, message: 'Unauthorized' })
-    }
-
+    if (err) return next({ status: 401, message: 'Unauthorized' })
     req.claim = payload
     next()
   })
+
 }
 
-function isSelf(req, res, next){
+const isSelf = (req, res, next) => {
 
-  if(parseInt(req.params.userId) !== req.claim.id){
+  if (parseInt(req.params.userid) !== req.claim.id)
     return next({ status: 401, message: 'Unauthorized' })
-  }
-
   next()
+
 }
 
-
-
-module.exports = {
-  login,
-  getAuthStatus,
-  isAuthenticated,
-  isSelf
-}
+module.exports = { login, status, authenticated, status, isSelf }
