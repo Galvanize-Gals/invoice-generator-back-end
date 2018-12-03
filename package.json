@@ -5,8 +5,8 @@
   "main": "knexfile.js",
   "scripts": {
     "dev": "nodemon ./src/app.js",
-    "knex": "knex",
-    "start": "node ./src/app.js"
+    "start": "node ./src/app.js",
+    "knex": "knex"
   },
   "author": "",
   "license": "ISC",
