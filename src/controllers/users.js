@@ -10,10 +10,10 @@ function getAll(req, res, next){
 }
 
 function create(req, res, next){
-  if(!req.body.username || !req.body.password || !req.body.first_name || !req.body.last_name){
+  if(!req.body.email && !req.body.password && !req.body.first_name && !req.body.last_name){
     return next({ status: 400, message: 'Bad username'})
   }
-  userModel.create(req.body.username, req.body.password, req.body.first_name, req.body.last_name)
+  userModel.create(req.body.email, req.body.password, req.body.first_name, req.body.last_name)
   .then(function(data){
     return res.status(201).send({ data })
   })

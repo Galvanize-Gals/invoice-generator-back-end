@@ -2,41 +2,41 @@ const knex = require('../../db/index')
 const bcrypt = require('bcrypt')
 
 function getAll(){
-    return knex('users')
+    return knex('accounts')
 }
 
-function getOneByUserName(username){
+function getUser(email){
   return (
-    knex('users')
-    .where({ username })
+    knex('accounts')
+    .where({ email })
     .first()
   )
 }
 
-function create(username, password, first_name, last_name){
+function create(email, password, first_name, last_name){
 
-  return getOneByUserName(username)
+  return getUser(email)
   .then(function(data){
     if(data) throw { status: 400, message:'User already exists'}
 
     return bcrypt.hash(password, 10)
   })
-  .then(function(hashedPassword){
+  .then(function(password){
 
     return (
-      knex('users')
-      .insert({ username, password: hashedPassword, first_name, last_name })
+      knex('accounts')
+      .insert({ email, hashword: password, first_name, last_name })
       .returning('*')
     )
   })
   .then(function([ data ]){
-    delete data.password
+    delete data.hashword
     return data
   })
 }
 
 module.exports = {
   getAll,
-  getOneByUserName,
+  getUser,
   create
 }
