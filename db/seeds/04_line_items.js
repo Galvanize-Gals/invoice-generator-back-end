@@ -13,5 +13,11 @@ exports.seed = function(knex, Promise) {
         {id: 6, description: 'construction', quantity: '100', rate: '85', invoice_id: "3"}
 
       ]);
-    });
+    })
+    .then(() => {
+      // reset sequence
+      return knex.raw(
+        `SELECT setval('line_items_seq', (SELECT MAX(id) FROM line_items));`
+        )
+    })
 };

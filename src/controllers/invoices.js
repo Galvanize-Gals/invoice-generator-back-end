@@ -19,8 +19,21 @@ function getOne(req, res, next){
     .catch(next)
 }
 
+function create(req, res, next) {
+    console.log(req.body)
+    model.create(req.body.invoice_number, req.body.due_date, req.body.notes)
+    .then(function(data) {
+        if(data){
+            return res.status(201).send({data})
+        }
+        throw ({ status: 400, message: "Invoice Not Created",})
+    })
+    .catch(next)
+}
+
 
 module.exports = {
     getAll,
-    getOne
+    getOne,
+    create
 }
