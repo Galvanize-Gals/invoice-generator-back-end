@@ -10,5 +10,11 @@ exports.seed = function (knex, Promise) {
         { id: 3, email: 'ramona@realmail.com', hashword: 'road', first_name: "Ramona", last_name: "Jones", business: "GodzillaTek" },
         { id: 4, email: 'test@me.com', hashword: '$2b$10$3OaRYsjX4tvuBBP9MzVbxeeS7w1CCRXFLxVnURS/KyLxZNJhew/US', first_name: "Ramona", last_name: "Goldberg", business: "GodzillaTek"}
       ]);
-    });
+    })
+    .then(() => {
+      // reset sequence
+      return knex.raw(
+        `SELECT setval('accounts_id_seq', (SELECT MAX(id) FROM accounts));`
+        )
+    })
 };
