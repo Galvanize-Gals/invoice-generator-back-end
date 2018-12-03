@@ -5,7 +5,7 @@ exports.up = function(knex, Promise) {
     table.integer('invoice_number')
     table.date('due_date')
     table.text('notes')
-    table.boolean('is_paid')
+    table.boolean('is_paid').defaultTo(false)
     table.timestamps(true, true)
   })
 };
