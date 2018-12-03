@@ -15,7 +15,20 @@ app.use(bodyParser.json())
 
 
 // Routes
+app.use('/auth', require('./routes/auth'))
+app.use('/users', require('./routes/users'))
 
+//authorization & authentication
+const authController = require('./controllers/auth')
+
+app.get('/protected',
+        authController.isAuthenticated,
+        function(req, res, next){ res.send({ id: req.claim.id, message: "For authenticated eyes only" }) })
+
+app.get('/protected/:userId',
+        authController.isAuthenticated,
+        authController.isSelf,
+        function(req, res, next){ res.send({ id: req.claim.id, message: "For your eyes only"}) })
 
 
 // Default Route

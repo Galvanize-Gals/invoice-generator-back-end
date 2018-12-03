@@ -1,0 +1,27 @@
+const userModel = require('../models/users')
+
+
+function getAll(req, res, next){
+    userModel.getAll()
+    .then(function(data){
+      res.send({ data })
+    })
+    .catch(next)
+}
+
+function create(req, res, next){
+  if(!req.body.username || !req.body.password || !req.body.first_name || !req.body.last_name){
+    return next({ status: 400, message: 'Bad username'})
+  }
+  userModel.create(req.body.username, req.body.password, req.body.first_name, req.body.last_name)
+  .then(function(data){
+    return res.status(201).send({ data })
+  })
+  .catch(next)
+}
+
+
+module.exports = {
+  getAll,
+  create
+}
