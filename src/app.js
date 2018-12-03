@@ -2,22 +2,18 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const morgan = require('morgan')
 const cors = require('cors')
-
-if(process.env.NODE_ENV !== 'production'){
-  require('dotenv').load()
-}
-
 const app = express()
 
 app.use(cors())
-app.use(morgan('dev'))
 app.use(bodyParser.json())
+if (process.env.NODE_ENV === 'development') app.use(morgan('dev'))
+if(process.env.NODE_ENV !== 'production'){ require('dotenv').load() }
 
 
 // Routes
+app.use('/', require('./routes/auth'))
+app.use('/', require('./routes/users'))
 app.use('/invoices', require('./routes/invoices'));
-app.use('/auth', require('./routes/auth'))
-app.use('/users', require('./routes/users'))
 app.use('/invoices', require('./routes/line_items'));
 
 //authorization & authentication
@@ -31,6 +27,7 @@ app.get('/protected/:userId',
         authController.isAuthenticated,
         authController.isSelf,
         function(req, res, next){ res.send({ id: req.claim.id, message: "For your eyes only"}) })
+
 
 
 // Default Route
@@ -57,5 +54,7 @@ app.use(function(err, req, res, next){
 const port = process.env.PORT || 3000
 
 app.listen(port, function(){
-  console.log(`Listening on port ${port}`)
+
+  console.log(`Invoice Creator listening on port ${port}`)
 })
+

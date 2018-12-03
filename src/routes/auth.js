@@ -1,9 +1,8 @@
 const express = require('express')
 const router = express.Router()
-const ctl = require('../controllers/auth')
+const ctrl = require('../controllers/auth')
 
-router.get('/token', ctl.isAuthenticated, ctl.getAuthStatus)
-router.post('/token', ctl.login)
-
+router.get('/login', ctrl.authenticated, ctrl.status)
+router.post('/login', ctrl.login)
 
 module.exports = router

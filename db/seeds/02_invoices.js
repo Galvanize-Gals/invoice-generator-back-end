@@ -9,5 +9,11 @@ exports.seed = function(knex, Promise) {
         {id: 2, invoice_number: '406', due_date: '2018-12-07', notes: "don't eat yellow snow"},
         {id: 3, invoice_number: '6', due_date: '2019-03-01', notes: "Squirrel!", is_paid: true}
       ]);
-    });
+    })
+    .then(() => {
+      // reset sequence
+      return knex.raw(
+        `SELECT setval('invoices_id_seq', (SELECT MAX(id) FROM invoices));`
+        )
+    })
 };
