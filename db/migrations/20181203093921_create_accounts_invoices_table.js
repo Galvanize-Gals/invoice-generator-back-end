@@ -4,7 +4,7 @@ exports.up = function(knex, Promise) {
     table.increments()
     table.integer('vendor_id').references('accounts.id').onDelete('CASCADE').notNullable()
     table.integer('client_id').references('accounts.id').onDelete('CASCADE').notNullable()
-    table.integer('invoice_id').refereces('invoices.id').onDelete('CASCADE').notNullable()
+    table.integer('invoice_id').references('invoices.id').onDelete('CASCADE').notNullable()
   })
 };
 
