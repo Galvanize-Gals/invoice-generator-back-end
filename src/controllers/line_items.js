@@ -9,7 +9,7 @@ function getAll(req, res, next){
 }
 
 function getOne(req, res, next){
-    model.getOne(parseInt(req.params.line_item_id))
+    model.getOne(parseInt(req.params.lineItemId))
     .then(function(data){
         if(data){
             return res.send({ data })

@@ -7,5 +7,6 @@ const ctr = require('../controllers/invoices')
 router.get('/', ctr.getAll)
 router.get('/:invoiceId', ctr.getOne)
 router.post('/', ctr.create)
+router.delete('/:invoiceId', ctr.remove)
 
 module.exports = router;

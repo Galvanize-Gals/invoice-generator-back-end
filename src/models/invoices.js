@@ -13,11 +13,18 @@ function create(number, due, notes) {
     return knex('invoices')
     .insert({invoice_number: number, due_date: due, notes: notes })
     .returning('*')
+}
 
+function remove(invoiceId) {
+    return knex('invoices')
+    .del()
+    .where({'invoices.id': invoiceId})
+    .returning('*')
 }
 
 module.exports = {
     getAll,
     getOne,
-    create
+    create,
+    remove
 }
