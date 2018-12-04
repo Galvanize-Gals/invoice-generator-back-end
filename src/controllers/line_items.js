@@ -27,10 +27,23 @@ function create(req, res, next) {
             }
             throw ({ status: 400, message: "Line Item Not Created" })
         })
+        .catch(next)
+}
+
+function remove(req, res, next) {
+    model.remove(req.params.line_item_id)
+        .then(function (data) {
+            if (data) {
+                return res.status(201).send({ data })
+            }
+            throw ({ status: 400, message: "Line Item Not Deleted" })
+        })
+        .catch(next)
 }
 
 module.exports = {
     getAll,
     getOne,
-    create
+    create,
+    remove
 }

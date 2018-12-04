@@ -31,6 +31,17 @@ function create(req, res, next) {
 
 }
 
+function update(req, res, next) {
+    model.update(req.params.invoiceId, req.body.invoice_number, req.body.due_date, req.body.notes)
+    .then(function(data) {
+        if(data){
+            return res.status(201).send({data})
+        }
+        throw({ status: 400, message: "Invoice Not Updated"})
+    })
+    .catch(next)
+}
+
 function remove(req, res, next) {
     model.remove(req.params.invoiceId)
         .then(function (data) {
@@ -47,5 +58,6 @@ module.exports = {
     getAll,
     getOne,
     create,
+    update,
     remove
 }
