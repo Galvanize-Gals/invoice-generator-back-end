@@ -4,9 +4,10 @@ function getAll(invoiceId) {
     return knex('line_items').where({ 'line_items.invoice_id': invoiceId })
 }
 
-function getOne(line_item_id) {
+function getOne(lineItemId){
     return knex('line_items')
-        .where({ 'line_items.id': line_item_id })
+    .where({ 'line_items.id': lineItemId })
+
 }
 
 function create(desc, quant, rate, inv_id) {
