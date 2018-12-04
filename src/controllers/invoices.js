@@ -20,7 +20,6 @@ function getOne(req, res, next){
 }
 
 function create(req, res, next) {
-    console.log(req.body)
     model.create(req.body.invoice_number, req.body.due_date, req.body.notes)
     .then(function(data) {
         if(data){
@@ -31,9 +30,21 @@ function create(req, res, next) {
     .catch(next)
 }
 
+function remove(req, res, next) {
+    model.remove(req.params.invoiceId)
+    .then(function(data){
+        if(data){
+            return res.status(201).send({data})
+        }
+        throw ({status: 400, message: "Invoice Not Deleted"})
+    })
+    .catch(next)
+}
+
 
 module.exports = {
     getAll,
     getOne,
-    create
+    create,
+    remove
 }
