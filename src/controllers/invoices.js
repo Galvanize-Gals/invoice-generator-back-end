@@ -1,7 +1,7 @@
 const model = require('../models/invoices')
 
-function getAll(req, res, next){
-    model.getAll()
+function getAllVendorInvoices(req, res, next){
+    model.getAllVendorInvoices(parseInt(req.body.vendorId))
     .then(function(data){
       res.send({ data })
     })
@@ -53,10 +53,11 @@ function remove(req, res, next) {
 }
 
 
+
 module.exports = {
-    getAll,
     getOne,
     create,
     update,
-    remove
+    remove,
+    getAllVendorInvoices
 }

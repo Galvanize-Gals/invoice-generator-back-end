@@ -1,8 +1,8 @@
 const knex = require('../../db/index')
 
-function getAll(){
-    return knex('invoices')
-}
+// function getAll(){
+//     return knex('invoices')
+// }
 
 function getOne(invoiceId){
     return knex('invoices')
@@ -29,10 +29,17 @@ function remove(invoiceId) {
     .returning('*')
 }
 
+function getAllVendorInvoices (vendorId){
+    return knex('invoices')
+    .join('accounts_invoices', 'invoice_id', 'invoices.id')
+    .where('accounts_invoices.vendor_id', vendorId)
+}
+
 module.exports = {
-    getAll,
+   // getAll,
     getOne,
     create,
     update,
-    remove
+    remove,
+    getAllVendorInvoices
 }
