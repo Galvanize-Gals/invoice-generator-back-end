@@ -7,7 +7,10 @@ exports.seed = function(knex, Promise) {
       return knex('accounts_invoices').insert([
         {id: 1, vendor_id: '2', client_id: "1", invoice_id: "3"},
         {id: 2, vendor_id: '2', client_id: "3", invoice_id: "2"},
-        {id: 3, vendor_id: '3', client_id: "1", invoice_id: "1"}
+        {id: 3, vendor_id: '4', client_id: "1", invoice_id: "1"},
+        {id: 4, vendor_id: '3', client_id: "4", invoice_id: "4"},
+        {id: 5, vendor_id: '4', client_id: "1", invoice_id: "5"},
+        {id: 6, vendor_id: '1', client_id: "4", invoice_id: "6"}
       ]);
     })
     .then(() => {
