@@ -13,7 +13,7 @@ function create(req, res, next){
   if(!req.body.email && !req.body.password && !req.body.first_name && !req.body.last_name){
     return next({ status: 400, message: 'Bad username'})
   }
-  userModel.create(req.body.email, req.body.password, req.body.company, req.body.first_name, req.body.last_name)
+  userModel.create(req.body.email, req.body.password, req.body.first_name, req.body.last_name, req.body.company)
   .then(function(data){
     return res.status(201).send({ data })
   })
