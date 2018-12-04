@@ -15,6 +15,13 @@ function create(number, due, notes) {
     .returning('*')
 }
 
+function update(invoiceId, number, due, notes) {
+    return knex('invoices')
+    .update({invoice_number: number, due_date: due, notes: notes })
+    .where({'invoices.id': invoiceId})
+    .returning('*')
+}
+
 function remove(invoiceId) {
     return knex('invoices')
     .del()
@@ -26,5 +33,6 @@ module.exports = {
     getAll,
     getOne,
     create,
+    update,
     remove
 }
