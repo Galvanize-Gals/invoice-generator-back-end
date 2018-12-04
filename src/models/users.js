@@ -13,7 +13,7 @@ function getUser(email){
   )
 }
 
-function create(email, password, first_name, last_name){
+function create(email, password, first_name, last_name, company = null){
 
   return getUser(email)
   .then(function(data){
@@ -25,7 +25,7 @@ function create(email, password, first_name, last_name){
 
     return (
       knex('accounts')
-      .insert({ email, hashword: password, first_name, last_name })
+      .insert({ email, hashword: password, first_name, last_name, company })
       .returning('*')
     )
   })

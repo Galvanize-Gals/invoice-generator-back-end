@@ -6,7 +6,7 @@ exports.up = function(knex, Promise) {
     table.text('hashword').notNullable()
     table.string('first_name')
     table.string('last_name')
-    table.string('business')
+    table.string('company')
     table.timestamps(true, true)
   })
 };
