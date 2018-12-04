@@ -9,7 +9,7 @@ function getAll(req, res, next) {
 }
 
 function getOne(req, res, next) {
-    model.getOne(parseInt(req.params.line_item_id))
+    model.getOne(parseInt(req.params.lineItemId))
         .then(function (data) {
             if (data) {
                 return res.send({ data })
@@ -20,7 +20,7 @@ function getOne(req, res, next) {
 }
 
 function create(req, res, next) {
-    model.create(req.body.description, req.body.quantity, req.body.rate, req.body.invoice_id)
+    model.create(req.body.items)
         .then(function (data) {
             if (data) {
                 return res.status(201).send({ data })

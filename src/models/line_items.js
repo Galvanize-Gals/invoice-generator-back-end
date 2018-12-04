@@ -10,10 +10,10 @@ function getOne(lineItemId){
 
 }
 
-function create(desc, quant, rate, inv_id) {
+function create(items) {
     return knex('line_items')
-        .insert({ description: desc, quantity: quant, rate: rate, invoice_id: inv_id })
-        .returning('*')
+    .insert(items)
+    .returning('*')
 }
 
 function remove(id) {
@@ -22,8 +22,6 @@ function remove(id) {
         .where({ 'line_items.id': id })
         .returning('*')
 }
-
-
 
 module.exports = {
     getAll,
