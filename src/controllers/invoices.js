@@ -1,11 +1,20 @@
 const model = require('../models/invoices')
 
-function getAll(req, res, next) {
-    model.getAll()
-        .then(function (data) {
-            res.send({ data })
-        })
-        .catch(next)
+
+function getAllVendorInvoices(req, res, next){
+    model.getAllVendorInvoices(parseInt(req.body.vendorId))
+    .then(function(data){
+      res.send({ data })
+    })
+    .catch(next)
+}
+
+function getAllClientInvoices(req, res, next){
+    model.getAllClientInvoices(parseInt(req.body.clientId))
+    .then(function(data){
+      res.send({ data })
+    })
+    .catch(next)
 }
 
 function getOne(req, res, next) {
@@ -54,10 +63,12 @@ function remove(req, res, next) {
 }
 
 
+
 module.exports = {
-    getAll,
     getOne,
     create,
     update,
-    remove
+    remove,
+    getAllVendorInvoices,
+    getAllClientInvoices
 }
