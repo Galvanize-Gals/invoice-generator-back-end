@@ -14,8 +14,8 @@ app.use('/', require('./routes/auth'))
 app.use('/', require('./routes/users'))
 app.use('/invoices', require('./routes/invoices'))
 app.use('/invoices', require('./routes/line_items'))
-app.use('/vendor', require('./routes/vendor'))
-app.use('/client', require('./routes/client'))
+app.use('/vendors', require('./routes/vendor'))
+app.use('/clients', require('./routes/client'))
 
 // Default Route
 app.use(function(req, res, next){
