@@ -15,8 +15,6 @@ function create(items) {
     .returning('*')
 }
 
-
-
 module.exports = {
     getAll,
     getOne,
