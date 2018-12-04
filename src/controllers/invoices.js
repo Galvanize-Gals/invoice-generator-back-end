@@ -8,6 +8,14 @@ function getAllVendorInvoices(req, res, next){
     .catch(next)
 }
 
+function getAllClientInvoices(req, res, next){
+    model.getAllClientInvoices(parseInt(req.body.clientId))
+    .then(function(data){
+      res.send({ data })
+    })
+    .catch(next)
+}
+
 function getOne(req, res, next){
     model.getOne(parseInt(req.params.invoiceId))
     .then(function(data){
@@ -59,5 +67,6 @@ module.exports = {
     create,
     update,
     remove,
-    getAllVendorInvoices
+    getAllVendorInvoices,
+    getAllClientInvoices
 }

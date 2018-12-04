@@ -35,11 +35,18 @@ function getAllVendorInvoices (vendorId){
     .where('accounts_invoices.vendor_id', vendorId)
 }
 
+function getAllClientInvoices(clientId){
+    return knex('invoices')
+    .join('accounts_invoices', 'invoice_id', 'invoices.id')
+    .where('accounts_invoices.client_id', clientId)
+}
+
+
 module.exports = {
-   // getAll,
     getOne,
     create,
     update,
     remove,
-    getAllVendorInvoices
+    getAllVendorInvoices,
+    getAllClientInvoices
 }
