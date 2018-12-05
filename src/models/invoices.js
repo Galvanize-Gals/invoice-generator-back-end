@@ -2,18 +2,15 @@ const knex = require('../../db/index')
 
 function getAllVendorInvoices (userId){
     return knex('invoices')
-    .select('invoices.id','invoice_number','due_date','notes','is_paid','invoices.created_at','invoices.updated_at','vendor_id','client_id','invoice_id','email','first_name', 'last_name', 'business')
+    .select('invoices.id','invoice_number','due_date','notes','is_paid','invoices.created_at','invoices.updated_at','vendor_id','client_id','invoice_id','email','first_name', 'last_name', 'company')
     .join('accounts_invoices', 'invoice_id', 'invoices.id')
     .join('accounts', 'accounts.id', 'accounts_invoices.client_id')
     .where('accounts_invoices.vendor_id', userId)
-    // return knex('invoices')
-    // .join('accounts_invoices', 'invoice_id', 'invoices.id')
-    // .where('accounts_invoices.vendor_id', userId)
 }
 
 function getAllClientInvoices(userId){
     return knex('invoices')
-    .select('invoices.id','invoice_number','due_date','notes','is_paid','invoices.created_at','invoices.updated_at','vendor_id','client_id','invoice_id','email','first_name', 'last_name', 'business')
+    .select('invoices.id','invoice_number','due_date','notes','is_paid','invoices.created_at','invoices.updated_at','vendor_id','client_id','invoice_id','email','first_name', 'last_name', 'company')
     .join('accounts_invoices', 'invoice_id', 'invoices.id')
     .join('accounts', 'accounts.id', 'accounts_invoices.vendor_id')
     .where('accounts_invoices.client_id', userId)
