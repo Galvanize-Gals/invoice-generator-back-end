@@ -11,9 +11,9 @@ if(process.env.NODE_ENV !== 'production'){ require('dotenv').load() }
 
 // Routes
 app.use('/', require('./routes/auth'))
-app.use('/', require('./routes/users'))
-app.use('/invoices', require('./routes/invoices'))
-app.use('/invoices', require('./routes/line_items'))
+app.use('/users', require('./routes/users'))
+// app.use('/users', require('./routes/invoices'))
+// app.use('/users', require('./routes/line_items'))
 
 
 // Default Route
