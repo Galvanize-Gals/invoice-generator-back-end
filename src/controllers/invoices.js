@@ -16,6 +16,7 @@ function getAllClientInvoices(req, res, next){
     .catch(next)
 }
 
+
 function getOneVendorInvoice(req, res, next){
     model.getOneVendorInvoice(parseInt(req.params.invoiceId))
     .then(function([data]){
