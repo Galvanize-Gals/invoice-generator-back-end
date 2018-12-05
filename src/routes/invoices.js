@@ -9,14 +9,14 @@ const auth = require('../controllers/auth')
 router.get('/vendor', auth.authenticated, ctr.getAllVendorInvoices)
 router.get('/client', auth.authenticated, ctr.getAllClientInvoices)
 
-router.get('/vendor/:invoiceId', auth.authenticated, ctr.getOneVendorInvoice)
-router.get('/client/:invoiceId', auth.authenticated,  ctr.getOneClientInvoice)
+router.get('/:invoiceId/vendor', auth.authenticated, ctr.getOneVendorInvoice)
+router.get('/:invoiceId/client', auth.authenticated,  ctr.getOneClientInvoice)
 
 router.post('/vendor', auth.authenticated, ctr.create)
-router.put('/vendor/:invoiceId', auth.authenticated, ctr.update)
-router.delete('/vendor/:invoiceId', auth.authenticated, ctr.remove)
+router.put('/:invoiceId/vendor', auth.authenticated, ctr.update)
+router.delete('/:invoiceId/vendor', auth.authenticated, ctr.remove)
 
-router.post('/vendor/:invoiceId/line_items', auth.authenticated, ctr.createLineItem)
+router.post('/:invoiceId/vendor/line_items', auth.authenticated, ctr.createLineItem)
 
 
 module.exports = router;
