@@ -51,7 +51,7 @@ function create(req, res, next) {
 }
 
 function update(req, res, next) {
-    model.update(req.params.invoiceId, req.body.invoice_number, req.body.due_date, req.body.notes)
+    model.update(req.params.invoiceId)
     .then(function(data) {
         if(data){
             return res.status(201).send({ data })

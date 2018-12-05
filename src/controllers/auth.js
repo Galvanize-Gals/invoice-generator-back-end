@@ -28,15 +28,23 @@ const authenticated = (req, res, next) => {
     req.claim = payload
     next()
   })
-
 }
 
 const isSelf = (req, res, next) => {
-
-  if (parseInt(req.params.userid) !== req.claim.id)
+  if (parseInt(req.params.userId) !== req.claim.id)
     return next({ status: 401, message: 'Unauthorized' })
   next()
-
 }
 
-module.exports = { login, status, authenticated, status, isSelf }
+const isVendorOnInvoice = (req, res, next) => {
+  auth.isVendorOnInvoice(req.params.invoiceId)
+    .then( ([ data ]) => {
+      if (data) {
+        if (data.vendor_id === parseInt(req.params.userId)) return next()
+      }
+      throw ({ status: 401, message: "Unauthorized" })
+    })
+    .catch(next)
+  }
+
+  module.exports = { login, status, authenticated, status, isSelf, isVendorOnInvoice }

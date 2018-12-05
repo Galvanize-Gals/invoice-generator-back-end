@@ -1,6 +1,8 @@
 const db = require('../../db')
 const bcrypt = require('bcrypt')
 const users = require('./users')
+const knex = require('../../db/index')
+
 
 const login = (email, password) => {
   let user
@@ -17,4 +19,9 @@ const login = (email, password) => {
     })
 }
 
-module.exports = { login }
+const isVendorOnInvoice = (invoiceId) => {
+  return knex('accounts_invoices')
+  .where({'accounts_invoices.invoice_id': invoiceId})
+}
+
+module.exports = { login, isVendorOnInvoice }
