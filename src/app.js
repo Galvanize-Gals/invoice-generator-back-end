@@ -6,7 +6,7 @@ const app = express()
 
 app.use(cors())
 app.use(bodyParser.json())
-if (process.env.NODE_ENV === 'development') app.use(morgan('dev'))
+app.use(morgan('dev'))
 if(process.env.NODE_ENV !== 'production'){ require('dotenv').load() }
 
 // Routes
@@ -42,4 +42,3 @@ const port = process.env.PORT || 3000
 app.listen(port, function(){
   console.log(`Invoice Creator listening on port ${port}`)
 })
-
