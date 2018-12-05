@@ -9,6 +9,14 @@ function getAll(req, res, next){
     .catch(next)
 }
 
+function getOne(req, res, next){
+  userModel.getUser(req.body.email)
+  .then(function(data){
+    res.send({ data })
+  })
+  .catch(next)
+}
+
 function create(req, res, next){
   if(!req.body.email && !req.body.password && !req.body.first_name && !req.body.last_name){
     return next({ status: 400, message: 'Bad username'})
@@ -23,5 +31,6 @@ function create(req, res, next){
 
 module.exports = {
   getAll,
+  getOne,
   create
 }
