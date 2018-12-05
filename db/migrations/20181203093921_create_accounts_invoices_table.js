@@ -9,5 +9,5 @@ exports.up = function(knex, Promise) {
 };
 
 exports.down = function(knex, Promise) {
-  return knex.schema.dropTable('account_invoices')
+  return knex.schema.dropTableIfExists('account_invoices')
 };
