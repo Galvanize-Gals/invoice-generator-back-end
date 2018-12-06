@@ -41,7 +41,7 @@ function getOneClientInvoice(req, res, next){
 }
 
 function create(req, res, next) {
-    model.create(req.params.userId, req.body.clientId, req.body.invoice_number, req.body.due_date, req.body.notes, req.body.is_paid)
+    model.create(req.params.userId, req.body.clientId, req.body.invoice_number, req.body.due_date, req.body.notes)
     .then(function([data]) {
         if(data){
             return res.status(201).send({ data })
