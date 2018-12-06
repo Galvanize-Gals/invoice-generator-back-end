@@ -38,7 +38,6 @@ function getAllClientInvoices(userId){
     })
 }
 
-
 function getOneVendorInvoice (invoiceId){
     return knex('invoices')
     .where({'invoices.id': invoiceId})

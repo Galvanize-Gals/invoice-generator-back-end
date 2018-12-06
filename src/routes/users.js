@@ -3,7 +3,9 @@ const router = express.Router({mergeParams: true})
 const userController = require('../controllers/users')
 
 router.post('/', userController.create)
-router.get('/', userController.getOne)
+router.get('/', userController.getUserByEmail)
+router.get('/:userId', userController.getOne)
+
 
 router.use('/:userId/invoices', require('../routes/invoices'))
 

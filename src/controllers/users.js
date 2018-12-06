@@ -9,8 +9,16 @@ function getAll(req, res, next){
     .catch(next)
 }
 
-function getOne(req, res, next){
+function getUserByEmail(req, res, next){
   userModel.getUser(req.query.email)
+  .then(function(data){
+    res.send({ data })
+  })
+  .catch(next)
+}
+
+function getOne(req, res, next){
+  userModel.getOne(req.params.userId)
   .then(function(data){
     res.send({ data })
   })
@@ -31,6 +39,7 @@ function create(req, res, next){
 
 module.exports = {
   getAll,
+  getUserByEmail,
   getOne,
   create
 }
