@@ -10,7 +10,11 @@ exports.seed = function(knex, Promise) {
         {id: 3, vendor_id: '4', client_id: "1", invoice_id: "1"},
         {id: 4, vendor_id: '3', client_id: "4", invoice_id: "4"},
         {id: 5, vendor_id: '4', client_id: "1", invoice_id: "5"},
-        {id: 6, vendor_id: '1', client_id: "4", invoice_id: "6"}
+        {id: 6, vendor_id: '1', client_id: "4", invoice_id: "6"},
+        {id: 7, vendor_id: '3', client_id: "4", invoice_id: "7"},
+        {id: 8, vendor_id: '1', client_id: "4", invoice_id: "8"},
+        {id: 9, vendor_id: '4', client_id: "2", invoice_id: "9"},
+        {id: 10, vendor_id: '4', client_id: "1", invoice_id: "10"}
       ]);
     })
     .then(() => {
