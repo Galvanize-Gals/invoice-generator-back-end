@@ -63,8 +63,8 @@ function create(userId, clientId, number, due, notes) {
 function update(invoiceId) {
     return knex('invoices')
     .where({'invoices.id': invoiceId})
-    .returning('*')
     .then( ([response]) => {
+        if (!response) throw {status: 400, message: "invoice doesn't exist"}
         return knex('invoices')
         .update({ is_paid: !response.is_paid })
         .where({'invoices.id': invoiceId})
