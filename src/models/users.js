@@ -8,7 +8,7 @@ function getAll(){
 function getUser(email){
   return (
     knex('accounts')
-    .where({ email })
+    .where({ 'email': email })
     .first()
   )
 }

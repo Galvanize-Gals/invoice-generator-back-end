@@ -12,8 +12,6 @@ if(process.env.NODE_ENV !== 'production'){ require('dotenv').load() }
 // Routes
 app.use('/', require('./routes/auth'))
 app.use('/users', require('./routes/users'))
-// app.use('/users', require('./routes/invoices'))
-// app.use('/users', require('./routes/line_items'))
 
 
 // Default Route
@@ -32,6 +30,7 @@ app.use(function(err, req, res, next){
   errorMessage.status = err.status || 500
   errorMessage.message = err.message || 'Internal Server Error'
 
+  console.log(errorMessage)
   res.status(errorMessage.status).send(errorMessage)
 })
 

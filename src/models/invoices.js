@@ -60,11 +60,16 @@ function create(userId, clientId, number, due, notes) {
     })
 }
 
-function update(invoiceId, number, due, notes) {
+function update(invoiceId) {
     return knex('invoices')
-    .update({invoice_number: number, due_date: due, notes: notes })
     .where({'invoices.id': invoiceId})
     .returning('*')
+    .then( ([response]) => {
+        return knex('invoices')
+        .update({ is_paid: !response.is_paid })
+        .where({'invoices.id': invoiceId})
+        .returning('*')
+    })  
 }
 
 function remove(invoiceId) {
@@ -76,7 +81,7 @@ function remove(invoiceId) {
 
 function createLineItem(inv_id, desc, quant, rate) {
     return knex('line_items')
-        .insert({ description: desc, quantity: quant, rate: rate, invoice_id: inv_id })
+        .insert({ invoice_id: inv_id, description: desc, quantity: quant, rate: rate  })
         .returning('*')
 }
 
