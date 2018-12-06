@@ -10,7 +10,7 @@ function getAll(req, res, next){
 }
 
 function getUserByEmail(req, res, next){
-  userModel.getUser(req.query.email)
+  userModel.getUserByEmail(req.query.email)
   .then(function(data){
     res.send({ data })
   })
