@@ -11,7 +11,6 @@ const login = (req, res, next) => {
       const token = jwt.sign({ id: user.id }, process.env.SECRET)
       return res.status(200).send({ token })
     }).catch(next)
-
 }
 
 const status = (req, res, next) => res.status(200).send({ id: req.claim.id })
