@@ -2,18 +2,26 @@ const knex = require('../../db/index')
 
 function getAllVendorInvoices (userId){
     return knex('invoices')
-    .select('invoices.id','invoice_number','due_date','notes','is_paid','invoices.created_at','invoices.updated_at','vendor_id','client_id','invoice_id','email','first_name', 'last_name', 'business')
+    .select('invoices.id','invoice_number','due_date','notes','is_paid','invoices.created_at','invoices.updated_at','vendor_id','client_id','invoice_id','email','first_name', 'last_name', 'company')
     .join('accounts_invoices', 'invoice_id', 'invoices.id')
     .join('accounts', 'accounts.id', 'accounts_invoices.client_id')
     .where('accounts_invoices.vendor_id', userId)
-    // return knex('invoices')
-    // .join('accounts_invoices', 'invoice_id', 'invoices.id')
-    // .where('accounts_invoices.vendor_id', userId)
+    .then(invoices => {
+        const line_items = invoices.map(i =>
+            getInvoiceLineItems(i.id)
+            .then(line_items => {
+                i.line_items = line_items
+                i.total = line_items.reduce((acc, ele) => acc + ele.subtotal, 0)
+                return i
+            })
+        )
+        return Promise.all(line_items)
+    })
 }
 
 function getAllClientInvoices(userId){
     return knex('invoices')
-    .select('invoices.id','invoice_number','due_date','notes','is_paid','invoices.created_at','invoices.updated_at','vendor_id','client_id','invoice_id','email','first_name', 'last_name', 'business')
+    .select('invoices.id','invoice_number','due_date','notes','is_paid','invoices.created_at','invoices.updated_at','vendor_id','client_id','invoice_id','email','first_name', 'last_name', 'company')
     .join('accounts_invoices', 'invoice_id', 'invoices.id')
     .join('accounts', 'accounts.id', 'accounts_invoices.vendor_id')
     .where('accounts_invoices.client_id', userId)
@@ -49,6 +57,9 @@ function getInvoiceLineItems (invoiceId){
 
 function getOneClientInvoice (invoiceId){
     return knex('invoices')
+    .select('invoices.id','invoice_number','due_date','notes','is_paid','invoices.created_at','invoices.updated_at','vendor_id','client_id','email','first_name', 'last_name', 'company')
+    .join('accounts_invoices', 'invoice_id', 'invoices.id')
+    .join('accounts', 'accounts.id', 'accounts_invoices.vendor_id')
     .where({'invoices.id': invoiceId})
 }
 
