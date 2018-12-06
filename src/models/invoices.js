@@ -34,6 +34,7 @@ function create(userId, clientId, number, due, notes) {
     .insert({ invoice_number: number, due_date: due, notes: notes })
     .returning('*')
     .then(([response]) => {
+        console.log(clientId)
         return knex('accounts_invoices')      
         .insert({ vendor_id: userId, client_id: clientId, invoice_id: response.id})
         .returning('*')

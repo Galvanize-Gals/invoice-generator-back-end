@@ -47,4 +47,4 @@ const isVendorOnInvoice = (req, res, next) => {
     .catch(next)
   }
 
-  module.exports = { login, status, authenticated, status, isSelf, isVendorOnInvoice }
+module.exports = { login, status, authenticated, status, isSelf, isVendorOnInvoice }

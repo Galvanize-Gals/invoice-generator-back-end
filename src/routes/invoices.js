@@ -14,7 +14,7 @@ router.get('/:invoiceId/client', auth.authenticated,  auth.isSelf, ctr.getOneCli
 
 router.post('/vendor', auth.authenticated, auth.isSelf, ctr.create)
 
-router.put('/:invoiceId/vendor', auth.authenticated, auth.isSelf, auth.isVendorOnInvoice, ctr.update)
+router.put('/:invoiceId/vendor', auth.authenticated, ctr.update)
 router.delete('/:invoiceId/vendor', auth.authenticated, auth.isSelf, auth.isVendorOnInvoice, ctr.remove)
 
 router.post('/:invoiceId/vendor/line_items', auth.authenticated, auth.isSelf, auth.isVendorOnInvoice, ctr.createLineItem)
