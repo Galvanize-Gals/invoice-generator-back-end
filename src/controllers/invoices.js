@@ -75,7 +75,7 @@ function remove(req, res, next) {
 
 
 function createLineItem(req, res, next) {
-    model.createLineItem(req.params.invoiceId, req.body.description, req.body.quantity, req.body.rate)
+    model.createLineItem(req.body.items)
         .then(function ([data]) {
             if (data) {
                 return res.status(201).send({ data })

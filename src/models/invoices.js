@@ -90,9 +90,9 @@ function remove(invoiceId) {
     .returning('*')
 }
 
-function createLineItem(inv_id, desc, quant, rate) {
+function createLineItem(items) {
     return knex('line_items')
-        .insert({ invoice_id: inv_id, description: desc, quantity: quant, rate: rate  })
+        .insert(items)
         .returning('*')
 }
 
