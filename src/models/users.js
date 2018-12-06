@@ -5,11 +5,18 @@ function getAll(){
     return knex('accounts')
 }
 
-function getUser(email){
+function getUserByEmail(email){
   return (
     knex('accounts')
     .where({ 'email': email })
     .first()
+  )
+}
+
+function getOne(userId){
+  return (
+    knex('accounts')
+    .where({ 'id': userId})
   )
 }
 
@@ -37,6 +44,7 @@ function create(email, password, first_name, last_name, company = null){
 
 module.exports = {
   getAll,
-  getUser,
+  getUserByEmail,
+  getOne,
   create
 }

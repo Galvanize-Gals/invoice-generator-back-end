@@ -38,7 +38,6 @@ function getAllClientInvoices(userId){
     })
 }
 
-
 function getOneVendorInvoice (invoiceId){
     return knex('invoices')
     .select('invoices.id', 'invoice_number', 'due_date', 'notes', 'is_paid', 'invoices.created_at', 'invoices.updated_at', 'vendor_id', 'client_id', 'email', 'first_name', 'last_name', 'company')
