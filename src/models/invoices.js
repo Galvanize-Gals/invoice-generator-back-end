@@ -6,6 +6,17 @@ function getAllVendorInvoices (userId){
     .join('accounts_invoices', 'invoice_id', 'invoices.id')
     .join('accounts', 'accounts.id', 'accounts_invoices.client_id')
     .where('accounts_invoices.vendor_id', userId)
+    .then(invoices => {
+        const line_items = invoices.map(i =>
+            getInvoiceLineItems(i.id)
+            .then(line_items => {
+                i.line_items = line_items
+                i.total = line_items.reduce((acc, ele) => acc + ele.subtotal, 0)
+                return i
+            })
+        )
+        return Promise.all(line_items)
+    })
 }
 
 function getAllClientInvoices(userId){
