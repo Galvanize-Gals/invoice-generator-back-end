@@ -11,11 +11,12 @@ function getAllVendorInvoices(req, res, next){
 
 function getAllClientInvoices(req, res, next){
     model.getAllClientInvoices(parseInt(req.params.userId))
-    .then(function(data){
+    .then(function (data) {
       res.send({ data })
     })
     .catch(next)
 }
+
 
 function getOneVendorInvoice(req, res, next){
     model.getOneVendorInvoice(parseInt(req.params.invoiceId))
