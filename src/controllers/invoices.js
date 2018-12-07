@@ -74,6 +74,7 @@ function remove(req, res, next) {
 
 
 function createLineItem(req, res, next) {
+    console.log(req.body)
     model.createLineItem(req.body.items)
         .then(function ([data]) {
             if (data) {
