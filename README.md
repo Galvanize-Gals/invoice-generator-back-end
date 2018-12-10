@@ -31,6 +31,8 @@ To use this app, you can either choose below 2 options.
 2. If you run it by forking and cloning github repositories and get the source code, follow below setup process.
   * Fork and clone this repository and [frontend repository](https://github.com/Galvanize-Gals/invoice-generator-frontend).
   * Run ```npm install```
+  * Run ```npm run knex migrate:latest```
+  * Run ```npm run knex seed:run```
   * Run ```npm run dev``` to use server in development mode
   * Run ```npm start``` to use server in production mode 
 
