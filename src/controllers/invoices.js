@@ -41,6 +41,7 @@ function getOneClientInvoice(req, res, next){
 
 function create(req, res, next) {
     model.create(req.params.userId, req.body.clientId, req.body.invoice_number, req.body.due_date, req.body.notes)
+    // unwrap data in model, not controller
     .then(function([data]) {
         if(data){
             return res.status(201).send({ data })
@@ -52,6 +53,7 @@ function create(req, res, next) {
 
 function update(req, res, next) {
     model.update(req.params.invoiceId)
+    // You might need to make sure that data in not in an array
     .then(function(data) {
         if(data){
             return res.status(201).send({ data })
@@ -63,6 +65,7 @@ function update(req, res, next) {
 
 function remove(req, res, next) {
     model.remove(req.params.invoiceId)
+    // You might need to make sure that data in not in an array
     .then(function(data){
         if(data){
             return res.status(201).send({ data })
@@ -74,6 +77,7 @@ function remove(req, res, next) {
 
 
 function createLineItem(req, res, next) {
+    // Clean up console.log's
     console.log(req.body)
     model.createLineItem(req.body.items)
         .then(function ([data]) {
