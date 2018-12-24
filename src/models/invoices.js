@@ -44,6 +44,7 @@ function getOneVendorInvoice (invoiceId){
     .join('accounts_invoices', 'invoice_id', 'invoices.id')
     .join('accounts', 'accounts.id', 'accounts_invoices.vendor_id')
     .where({'invoices.id': invoiceId})
+    // add .first() to return only one item
 }
 
 function getInvoiceLineItems (invoiceId){
@@ -63,6 +64,7 @@ function getOneClientInvoice (invoiceId){
     .join('accounts_invoices', 'invoice_id', 'invoices.id')
     .join('accounts', 'accounts.id', 'accounts_invoices.vendor_id')
     .where({'invoices.id': invoiceId})
+    // add .first() to return only one item
 }
 
 function create(userId, clientId, number, due, notes) {
@@ -74,6 +76,8 @@ function create(userId, clientId, number, due, notes) {
         .insert({ vendor_id: userId, client_id: clientId, invoice_id: response.id})
         .returning('*')
     })
+    // unwrap data on the model, not the controller
+    // .then(([data]) => data)
 }
 
 function update(invoiceId) {

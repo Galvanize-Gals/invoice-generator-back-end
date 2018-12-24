@@ -1,6 +1,8 @@
 const userModel = require('../models/users')
 
-
+// This function is not used
+// any code that is not triggered by a user
+// activity should not be in your code.
 function getAll(req, res, next){
     userModel.getAll()
     .then(function(data){
@@ -9,6 +11,10 @@ function getAll(req, res, next){
     .catch(next)
 }
 
+
+// make sure to check that req.query.email
+// has an actual value before sending it off to the database,
+// otherwise, you'll get a 500 error, instead of a 400
 function getUserByEmail(req, res, next){
   userModel.getUserByEmail(req.query.email)
   .then(function(data){
