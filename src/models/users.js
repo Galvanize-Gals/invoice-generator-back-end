@@ -1,8 +1,6 @@
 const knex = require('../../db/index')
 const bcrypt = require('bcrypt')
 
-// This function is not used
-// please remove
 function getAll(){
     return knex('accounts')
 }
